@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.BlogDatailsPage"
+             xmlns:local="clr-namespace:MauiApp1.Controls"
+             Title="BlogDetails">
+    <VerticalStackLayout Padding="10" Spacing="5">
+
+        <Border Stroke="#C49B33"
+        StrokeThickness="4"
+        StrokeShape="RoundRectangle 40,0,0,40"
+        Background="{DynamicResource Primary}"
+        Padding="32,16"
+        HorizontalOptions="Center">
+            <Label Text="{Binding Date}"
+           TextColor="White"
+           FontSize="Large"
+           FontAttributes="Bold" />
+        </Border>
+
+
+        <Label Text="{Binding Title}" FontSize="Default"></Label>
+
+            <CollectionView ItemsSource="{Binding Content}" ItemsLayout="VerticalGrid" VerticalOptions="FillAndExpand">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                            <Grid Padding="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                            <Label 
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Text="{Binding Text}"
+                                FontAttributes="Bold" />
+
+                        <local:HyperLinkLabel
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            FontAttributes="None" 
+                            Text="{Binding Link}" 
+                            Url="{Binding Link}" />
+                    </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+
+    </VerticalStackLayout>
+</ContentPage>

@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+     x:Class="MauiApp1.MainPage" >
+    
+        <VerticalStackLayout Spacing="5" Padding="10">
+            <Image
+            Source="dotnet_bot.png"
+            SemanticProperties.Description="Cute dot net bot waving hi to you!"
+            HeightRequest="200"
+            HorizontalOptions="Center" />
+
+            <Button Text="Reload" Command="{Binding LoadEntries}" />
+
+            <!--<ActivityIndicator IsRunning="{Binding IsLoading}" />-->
+
+            <Label Text="Blog Entries!" FontSize="Medium" />
+
+            <RefreshView IsRefreshing="{Binding IsLoading}" Command="{Binding LoadEntries}">
+                
+                <CollectionView ItemsSource="{Binding BlogEntries}" ItemsLayout="VerticalGrid" VerticalOptions="FillAndExpand">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.LeftItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Open"
+                                       BackgroundColor="LightGreen"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenEntry}"
+                                        CommandParameter="{Binding .}"
+                                        />
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Label 
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Text="{Binding Date}"
+                                FontAttributes="Bold" />
+                                <Label Grid.Row="1"
+                                Grid.Column="0"
+                                Text="{Binding Title}"
+                                FontAttributes="Italic"
+                                VerticalOptions="End" />
+                            </Grid>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            </RefreshView>
+
+            <!--<ListView ItemsSource="{Binding BlogEntries}" VerticalOptions="FillAndExpand">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Text="{Binding Date}" FontAttributes="Bold" />
+                                <Label Grid.Column="0" Grid.Row="1"  Text="{Binding Title}" FontAttributes="Italic" VerticalOptions="End" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>-->
+
+        </VerticalStackLayout>
+    
+
+</ContentPage>
