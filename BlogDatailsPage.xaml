@@ -19,7 +19,7 @@
         </Border>
 
 
-        <Label Text="{Binding Title}" FontSize="Default"></Label>
+        <Label Text="{Binding Title}" FontSize="Medium" />
 
             <CollectionView ItemsSource="{Binding Content}" ItemsLayout="VerticalGrid" VerticalOptions="FillAndExpand">
                 <CollectionView.ItemTemplate>

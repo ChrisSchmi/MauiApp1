@@ -17,6 +17,8 @@
 - https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/
 - https://learn.microsoft.com/en-us/dotnet/maui/user-interface/theming
 - https://www.youtube.com/watch?v=YLx2L7SXeaY
+- https://stackoverflow.com/questions/73447092/net-maui-swipeitem-command-binding-to-viewmodel-ancestor-fails
 
-
+## Disclaimer
+> This is a learning project for myself. Use it as it is - no warranty 😜
 

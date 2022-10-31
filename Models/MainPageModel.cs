@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Diagnostics;
 using System.Threading;
+using System.Collections.ObjectModel;
 
 namespace MauiApp1.Models
 {
@@ -39,8 +40,15 @@ namespace MauiApp1.Models
             _blogClient = blogClient;
             _blogEntries = new List<Entry>();
             IsLoading = false;
+            HasDelay = false;
 
-            LoadEntries = new Command(async () => await LoadBlogEntries(cancellationToken));
+            LoadEntries = new Command(async () => {
+
+                    if (_blogClient.IsBusy == false)
+                    {
+                        await LoadBlogEntries(cancellationToken);
+                    }             
+                });
 
             OpenEntry = new Command(async (payload) => {
                 // https://stackoverflow.com/questions/73447092/net-maui-swipeitem-command-binding-to-viewmodel-ancestor-fails
@@ -63,6 +71,21 @@ namespace MauiApp1.Models
         }
 
         private List<Entry> _blogEntries;
+        public List<Entry> BlogEntries
+        {
+            set
+            {
+                _blogEntries.Clear();
+                _blogEntries = value;
+                NotifyPropertyChanged("BlogEntries");
+            }
+            get
+            {
+                return _blogEntries;
+            }
+        }
+
+
         private BlogClient _blogClient;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -75,22 +98,12 @@ namespace MauiApp1.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public List<Entry> BlogEntries
-        {
-            set
-            {
-                _blogEntries = value;
-                NotifyPropertyChanged("BlogEntries");
-            }
-            get
-            {
-                return _blogEntries;
-            }
-        }
-
         public ICommand LoadEntries { get; set; }
 
         public ICommand OpenEntry { get; set; }
+
+        public bool HasDelay { get; set; }
+
 
         private bool _isLoading;
         public bool IsLoading
@@ -109,27 +122,29 @@ namespace MauiApp1.Models
 
         public async Task LoadBlogEntries(CancellationToken cancellationToken)
         {
-            Debug.WriteLine("LoadBlogEntries started...");
-
             try
             {
-                if (IsLoading == true)
+                if (_blogClient.IsBusy == true)
                 {
-                    Debug.WriteLine("LoadBlogEntries already running...");
-                    //return;
+                    Debug.WriteLine("_blogClient already busy...");
+                    return;
                 }
+
+                Debug.WriteLine("LoadBlogEntries started...");
 
                 IsLoading = true;
 
-                //await Task.Delay(3000);
-
-                
 
                 var entries = await _blogClient?.GetEntries(cancellationToken);
 
+                if (HasDelay == true)
+                {
+                    await Task.Delay(3000);
+                }
+
+
                 if (entries.Any() == true)
                 {
-                    // BlogEntries.Clear();
                     BlogEntries = entries;
                 }
 
