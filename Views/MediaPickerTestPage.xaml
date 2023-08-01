@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.Views.MediaPickerTestPage"
+             Title="MediaPickerTestPage">
+    <VerticalStackLayout>
+        <Frame>
+            <VerticalStackLayout
+                Margin="5,5,5,5">
+                    <Label 
+                        Text="Test for Media Picker"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="Center" />
+                <Button
+                    Margin="0,15,0,0"
+            Text="Pick Photo"
+            Command="{Binding OpenImageCommand}" />
+            </VerticalStackLayout>
+        </Frame>
+
+    </VerticalStackLayout>
+</ContentPage>
