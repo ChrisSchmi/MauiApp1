@@ -6,9 +6,7 @@ namespace MauiApp1.Views;
 
 public partial class MediaPickerTestPage : ContentPage
 {
-	public ICommand OpenImageCommand { get; private set; }
-
-	private MediaPickerTestPageViewModel viewModel;
+    private MediaPickerTestPageViewModel viewModel;
 
     public MediaPickerTestPage(MediaPickerTestPageViewModel model)
 	{

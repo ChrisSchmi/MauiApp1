@@ -10,11 +10,16 @@
                     <Label 
                         Text="Test for Media Picker"
                         VerticalOptions="Center" 
-                        HorizontalOptions="Center" />
-                <Button
-                    Margin="0,15,0,0"
-            Text="Pick Photo"
-            Command="{Binding OpenImageCommand}" />
+                        HorizontalOptions="Center"
+                        FontSize="Large"/>
+                    <Button
+                        Margin="0,15,0,0"
+                        Text="Pick Photo"
+                        Command="{Binding OpenImageCommand}" />
+                    <Button
+                        Margin="0,15,0,0"
+                        Text="Take Photo"
+                        Command="{Binding TakePictureCommand}" />
             </VerticalStackLayout>
         </Frame>
 
